@@ -5,16 +5,16 @@ import logo from "./../assets/logo.jpg";
 const NavBar = () => {
   const linkClasses = ({ isActive }) => {
     return (
-      "border border-blue-300 px-3 py-1 rounded-md " +
+      "border border-primary-300 px-3 py-1 rounded-md " +
       (isActive
-        ? "bg-blue-500 text-white hover:bg-white hover:text-blue-500"
-        : "bg-white text-blue-500 hover:bg-blue-500 hover:text-white")
+        ? "bg-primary-500 text-white hover:bg-white hover:text-primary-500"
+        : "bg-white text-primary-500 hover:bg-primary-500 hover:text-white")
     );
   };
 
   return (
     <nav className='p-6 w-full flex flex-row justify-between items-center border-b border-b-gray-300'>
-      <div className='flex space-x-3 text-3xl text-blue-500 font-semibold'>
+      <div className='flex space-x-3 text-3xl text-primary-500 font-semibold'>
         <img className='w-11 h-w-11' src={logo} alt='Logo' />
         <span>Rathod Coaching Classes</span>
       </div>
