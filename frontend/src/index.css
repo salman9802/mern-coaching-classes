@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes fromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(2rem); /* Move text 2rem (32px) down */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* Move to normal position */
+  }
+}
+
+.animate-from-bottom {
+  animation: fromBottom 1s ease-out forwards; /* Apply the animation */
+}
