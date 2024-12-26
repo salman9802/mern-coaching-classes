@@ -2,6 +2,7 @@ import React from "react";
 import Carousel from "../components/Carousel";
 import slide1 from "../assets/slides/slide1.jpg";
 import slide2 from "../assets/slides/slide2.jpg";
+import CoursesComponent from "../components/CoursesComponent";
 
 // const carouselItems = [
 //   <img src='https://via.placeholder.com/500x300?text=Image+1' alt='1' />,
@@ -13,28 +14,25 @@ import slide2 from "../assets/slides/slide2.jpg";
 const carouselItems = [
   {
     src: slide1,
-    content: (
-      <>
-        <div className='mb-3'>TAKE THE FIRST STEP TO KNOWLEDGE WITH US</div>
-        <div>The purpose of education is to turn mirrors into windows</div>
-      </>
-    ),
+    title: "TAKE THE FIRST STEP TO KNOWLEDGE WITH US",
+    body: "The purpose of education is to turn mirrors into windows",
     classNames: "left-1/2",
   },
   {
     src: slide2,
-    content: (
-      <>
-        <div className='mb-3'>BETTER EDUCATION FOR A BETTER WORLD</div>
-        <div>We believe there is nothing more important than education</div>
-      </>
-    ),
+    title: "BETTER EDUCATION FOR A BETTER WORLD",
+    body: "We believe there is nothing more important than education",
     classNames: "right-1/2",
   },
 ];
 
 const HomePage = () => {
-  return <Carousel items={carouselItems} />;
+  return (
+    <>
+      <Carousel items={carouselItems} />
+      <CoursesComponent />
+    </>
+  );
 };
 
 export default HomePage;
