@@ -12,7 +12,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className='flex justify-center items-center space-x-3'>
+    <nav className='hidden lg:flex justify-center items-center space-x-3'>
       <NavLink to='/' className={linkClasses}>
         Home
       </NavLink>
