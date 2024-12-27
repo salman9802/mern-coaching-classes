@@ -4,6 +4,7 @@ import slide1 from "../assets/slides/slide1.jpg";
 import slide2 from "../assets/slides/slide2.jpg";
 import CoursesComponent from "../components/CoursesComponent";
 import Achievers from "../components/Achievers";
+import BookVisit from "../components/BookVisit";
 
 // const carouselItems = [
 //   <img src='https://via.placeholder.com/500x300?text=Image+1' alt='1' />,
@@ -33,6 +34,7 @@ const HomePage = () => {
       <Carousel items={carouselItems} />
       <CoursesComponent />
       <Achievers />
+      <BookVisit />
     </>
   );
 };
