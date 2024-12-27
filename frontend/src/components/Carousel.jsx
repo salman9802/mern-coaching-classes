@@ -5,10 +5,10 @@ const Carousel = ({ items }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const defaultStyles = {
-    btn: "absolute top-1/2 text-white text-sm md:text-2xl hover:text-primary-500",
+    btn: "absolute top-1/2 z-30 text-white text-sm md:text-2xl hover:text-primary-500",
     img: "w-screen",
     textContent:
-      "absolute top-1/4 p-2 md:top-1/2 md:p-0 text-white opacity-0 transform translate-y-10 transition-all duration-700 ease-in-out animate-from-bottom",
+      "absolute top-1/4 p-2 z-20 md:top-1/2 md:p-0 text-white opacity-0 transform translate-y-10 transition-all duration-700 ease-in-out animate-from-bottom",
   };
 
   const prevItem = () => {
@@ -22,7 +22,9 @@ const Carousel = ({ items }) => {
 
   return (
     <div className='flex w-screen relative'>
-      <button className={`${defaultStyles.btn} left-6`} onClick={prevItem}>
+      <button
+        className={`${defaultStyles.btn} left-3 md:left-6`}
+        onClick={prevItem}>
         <FaArrowLeft />
       </button>
       {/* {items.map((item, index) => (
@@ -34,9 +36,13 @@ const Carousel = ({ items }) => {
         <div className='mb-1 text-sm md:mb-3 md:text-3xl'>
           {items[currentIndex].title}
         </div>
-        <div className='text-xs lg:text-lg'>{items[currentIndex].body}</div>
+        <div className='text-[0.5rem] md:text-xs lg:text-lg'>
+          {items[currentIndex].body}
+        </div>
       </div>
-      <button className={`${defaultStyles.btn} right-6`} onClick={nextItem}>
+      <button
+        className={`${defaultStyles.btn} right-3 md:right-6`}
+        onClick={nextItem}>
         <FaArrowRight />
       </button>
     </div>
