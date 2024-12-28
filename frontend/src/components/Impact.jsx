@@ -1,6 +1,7 @@
 import React from "react";
+import ImpactCounter from "./ImpactCounter";
 
-const Impact = () => {
+const Impact = ({ impactValues }) => {
   return (
     <div className='my-3 flex flex-col space-y-3 md:space-y-5 md:my-5 lg:space-y-7'>
       <div className='mt-3 mb-1 text-center font-semibold text-2xl text-primary-500 md:text-5xl md:mt-5 md:mb-3'>
@@ -9,31 +10,35 @@ const Impact = () => {
       {/* Statistics */}
       <div className='mx-auto rounded-md bg-primary-500/10 px-3 py-2 grid grid-cols-2 gap-2 md:flex md:space-y-0 md:space-x-5 md:flex-row md:px-5 md:py-3 lg:px-7 lg:py-5'>
         <div className='px-3 py-2 md:px-5 md:py-3 lg:px-7 lg:py-5'>
-          <span className='text-xl font-bold mr-2 text-primary-500 md:text-3xl lg:text-4xl'>
-            1000
-          </span>
+          <ImpactCounter
+            targetValue={impactValues.students}
+            duration={2}
+            showPlus={true}
+          />
           <span className='md:font-semibold md:text-lg lg:text-xl'>
             Students
           </span>
         </div>
         <div className='px-3 py-2 md:px-5 md:py-3 lg:px-7 lg:py-5'>
-          <span className='text-xl font-bold mr-2 text-primary-500 md:text-3xl lg:text-4xl'>
-            6
-          </span>
+          <ImpactCounter targetValue={impactValues.branches} duration={2} />
           <span className='md:font-semibold md:text-lg lg:text-xl'>
             Branches
           </span>
         </div>
         <div className='px-3 py-2 md:px-5 md:py-3 lg:px-7 lg:py-5'>
-          <span className='text-xl font-bold mr-2 text-primary-500 md:text-3xl lg:text-4xl'>
-            200+
-          </span>
+          <ImpactCounter
+            targetValue={impactValues.staff}
+            duration={2}
+            showPlus={true}
+          />
           <span className='md:font-semibold md:text-lg lg:text-xl'>Staff</span>
         </div>
         <div className='px-3 py-2 md:px-5 md:py-3 lg:px-7 lg:py-5'>
-          <span className='text-xl font-bold mr-2 text-primary-500 md:text-3xl lg:text-4xl'>
-            3500
-          </span>
+          <ImpactCounter
+            targetValue={impactValues.lectures}
+            duration={2}
+            showPlus={true}
+          />
           <span className='md:font-semibold md:text-lg lg:text-xl'>
             Lectures
           </span>

@@ -30,10 +30,17 @@ const carouselItems = [
 ];
 
 const HomePage = () => {
+  const impactValues = {
+    students: 5000,
+    branches: 10,
+    staff: 300,
+    lectures: 4500,
+  };
+
   return (
     <>
       <Carousel items={carouselItems} />
-      <Impact />
+      <Impact impactValues={impactValues} />
       <CoursesComponent />
       <Achievers />
       <BookVisit />
