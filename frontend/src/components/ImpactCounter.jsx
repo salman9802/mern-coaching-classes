@@ -58,7 +58,7 @@ const ImpactCounter = ({ targetValue, duration = 2, showPlus = false }) => {
     // <div ref={counterRef} className='text-4xl font-bold'>
     <div
       ref={counterRef}
-      className='text-xl font-bold mr-2 text-primary-500 md:text-3xl lg:text-4xl'>
+      className='text-xl font-bold mr-2 text-accent-500 md:text-3xl lg:text-4xl'>
       {currentValue.toLocaleString()} {showPlus && "+"}
     </div>
   );

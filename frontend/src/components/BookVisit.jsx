@@ -66,7 +66,7 @@ const BookVisit = () => {
             onChange={handleChange}
           />
           <button
-            className='bg-primary-500 rounded-lg px-3 py-1 md:px-5 md:py-3 hover:bg-white hover:text-primary-500 hover:border hover:border-primary-500'
+            className='bg-accent-300 rounded-lg px-3 py-1 md:px-5 md:py-3 hover:bg-white hover:text-accent-300 hover:border hover:border-accent-300'
             type='submit'>
             Book a visit
           </button>
