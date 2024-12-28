@@ -34,7 +34,7 @@ const BookVisit = () => {
         </div>
         <form className='flex flex-col space-y-5' onSubmit={handleSubmit}>
           <input
-            className='border border-gray-300 px-3 py-1 md:px-5 md:py-3'
+            className='border border-gray-300 px-3 py-1 md:px-5 md:py-3 focus:outline-accent-500'
             type='text'
             name='name'
             id='name'
@@ -42,7 +42,7 @@ const BookVisit = () => {
             onChange={handleChange}
           />
           <input
-            className='border border-gray-300 px-3 py-1 md:px-5 md:py-3'
+            className='border border-gray-300 px-3 py-1 md:px-5 md:py-3 focus:outline-accent-500'
             type='text'
             name='number'
             id='number'
@@ -50,7 +50,7 @@ const BookVisit = () => {
             onChange={handleChange}
           />
           <input
-            className='border border-gray-300 px-3 py-1 md:px-5 md:py-3'
+            className='border border-gray-300 px-3 py-1 md:px-5 md:py-3 focus:outline-accent-500'
             type='text'
             name='city'
             id='city'
@@ -58,7 +58,7 @@ const BookVisit = () => {
             onChange={handleChange}
           />
           <input
-            className='border border-gray-300 px-3 py-1 md:px-5 md:py-3'
+            className='border border-gray-300 px-3 py-1 md:px-5 md:py-3 focus:outline-accent-500'
             type='text'
             name='class'
             id='class'
@@ -66,7 +66,7 @@ const BookVisit = () => {
             onChange={handleChange}
           />
           <button
-            className='bg-accent-300 rounded-lg px-3 py-1 md:px-5 md:py-3 hover:bg-white hover:text-accent-300 hover:border hover:border-accent-300'
+            className='bg-accent-300 rounded-lg px-3 py-1 md:px-5 md:py-3 hover:bg-white hover:text-accent-300 hover:border hover:border-accent-300 focus:outline-accent-500'
             type='submit'>
             Book a visit
           </button>
