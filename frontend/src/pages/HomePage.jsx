@@ -7,6 +7,12 @@ import Achievers from "../components/Achievers";
 import BookVisit from "../components/BookVisit";
 import Impact from "../components/Impact";
 
+import student1 from "../assets/students/student1.webp";
+import student2 from "../assets/students/student2.jpg";
+import student3 from "../assets/students/student3.webp";
+import student4 from "../assets/students/student4.webp";
+import student5 from "../assets/students/student5.jpg";
+
 // const carouselItems = [
 //   <img src='https://via.placeholder.com/500x300?text=Image+1' alt='1' />,
 //   <img src='https://via.placeholder.com/500x300?text=Image+2' alt='2' />,
@@ -36,13 +42,20 @@ const HomePage = () => {
     staff: 300,
     lectures: 4500,
   };
+  const students = [
+    { image: student1, name: "Rohit S." },
+    { image: student2, name: "Sanjana R." },
+    { image: student3, name: "Arnav C." },
+    { image: student4, name: "Vedant C." },
+    { image: student5, name: "Sai R." },
+  ];
 
   return (
     <>
       <Carousel items={carouselItems} />
       <Impact impactValues={impactValues} />
       <CoursesComponent />
-      <Achievers />
+      <Achievers students={students} />
       <BookVisit />
     </>
   );
