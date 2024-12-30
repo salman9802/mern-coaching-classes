@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import CarouselSlide from "./CarouselSlide";
 
@@ -20,6 +20,13 @@ const Carousel = ({ items }) => {
   const nextItem = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
   };
+
+  useEffect(() => {
+    const carouselInterval = setInterval(nextItem, 2500);
+    return () => {
+      clearInterval(carouselInterval);
+    };
+  }, []);
 
   return (
     <div className='relative w-full overflow-x-hidden'>
