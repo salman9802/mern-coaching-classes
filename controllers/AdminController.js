@@ -8,17 +8,22 @@ const adminRegister = async (req, res, next) => {
   const isValidPassword =
     typeof password === "string" && password.trim().length > 0;
 
-  if (isValidUsername && isValidPassword) {
-    const newAdmin = await new AdminModel({
-      username,
-      password,
-      role: "nonroot",
-    });
-    newAdmin.save();
-    res.status(201).json({ msg: "Admin created" });
-  } else {
-    res.statusCode = 400;
-    next(new Error("Invalid username and password"));
+  let err;
+  try {
+    if (isValidUsername && isValidPassword) {
+      const newAdmin = await new AdminModel({
+        username,
+        password,
+      });
+      newAdmin.save();
+      res.status(201).json({ msg: "Admin created" });
+    } else {
+      err = new Error("Invalid username or password");
+      err.status = 400;
+      throw err;
+    }
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -29,17 +34,30 @@ const adminLogin = async (req, res, next) => {
   const isValidPassword =
     typeof password === "string" && password.trim().length > 0;
 
-  if (isValidUsername && isValidPassword) {
-    const adminExists = await AdminModel.findOne({ username, password });
-    if (adminExists) {
-      const token = jwtToken({ id: adminExists._id, username });
-      if (token) {
-        res.status(200).json({ msg: "Authentication successful", token });
+  let err;
+  try {
+    if (isValidUsername && isValidPassword) {
+      const adminExists = await AdminModel.findOne({ username });
+      if (adminExists) {
+        const token = jwtToken({ id: adminExists._id, username });
+        if (token) {
+          res.status(200).json({ msg: "Authentication successful", token });
+        } else {
+          err = new Error("Cannot create token");
+          throw err;
+        }
+      } else {
+        err = new Error("Invalid username or password");
+        err.status = 400;
+        throw err;
       }
+    } else {
+      err = new Error("Invalid username or password");
+      err.status = 400;
+      throw err;
     }
-  } else {
-    res.statusCode = 400;
-    next(new Error("Invalid username and password"));
+  } catch (error) {
+    next(error);
   }
 };
 

@@ -2,26 +2,34 @@ const jwt = require("jsonwebtoken");
 
 const jwtAuth = (req, res, next) => {
   const headerValue = req.header("Authorization");
-  let error = undefined;
+  let err = undefined;
 
-  if (!headerValue) {
-    error = new Error("Token not found!");
-    error.status = 400;
-  } else {
-    if (!headerValue.startsWith("Bearer")) {
-      error = new Error("Token should be a bearer token");
-      error.status = 400;
-    } else {
-      const token = headerValue.split(" ")[1];
-      try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.jwt = decoded;
-      } catch (error) {
-        error = new Error("Invalid Token");
-        error.status = 400;
-      }
+  try {
+    if (!headerValue) {
+      err = new Error("Token not found!");
+      err.status = 400;
+      throw err;
     }
-    next(error);
+    if (!headerValue.startsWith("Bearer")) {
+      err = new Error("Invalid Token");
+      err.status = 400;
+      throw err;
+    }
+
+    const token = headerValue.split(" ")[1];
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+      if (err) {
+        if (err instanceof jwt.TokenExpiredError) {
+          err = new Error("Token Expired");
+          err.status = 400;
+        }
+        throw err;
+      }
+      req.jwt = decoded;
+      next();
+    });
+  } catch (err) {
+    next(err);
   }
 };
 

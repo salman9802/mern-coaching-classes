@@ -7,7 +7,6 @@ require("dotenv").config();
 const { connectToMongo } = require("./db.config.js");
 connectToMongo();
 const { errorHandler } = require("./middlewares/Error.js");
-const { jwtAuth } = require("./middlewares/Auth.js");
 
 const PORT = process.env.PORT || 80;
 const app = express();
@@ -31,12 +30,6 @@ if (process.env.NODE_ENV === "production") {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/test", (req, res, next) => {
-  const err = new Error("this is error");
-  err.status = 404;
-  next(err);
-});
-
 // Admin routes
 app.use("/admin", require("./routes/AdminRoutes.js"));
 
@@ -45,6 +38,7 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(DIST_PATH, "index.html"));
 });
 
+// Custom error handling middleware
 app.use(errorHandler);
 
 app.listen(PORT, ["localhost", process.env.LOCAL_IP], () => {
