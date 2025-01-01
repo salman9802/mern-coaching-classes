@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
 
 const adminSchema = mongoose.Schema(
   {
@@ -20,5 +21,17 @@ const adminSchema = mongoose.Schema(
     collection: "admins",
   }
 );
+
+// function to generate jwt token
+adminSchema.methods.generateJWT = function () {
+  const payload = {
+    username: this.username,
+  };
+
+  const token = jwt.sign(payload, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_IN || "15m",
+  });
+  return token;
+};
 
 module.exports = mongoose.model("admins", adminSchema);

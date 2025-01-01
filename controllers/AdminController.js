@@ -46,7 +46,7 @@ const adminLogin = async (req, res, next) => {
     if (isValidUsername && isValidPassword) {
       const adminExists = await AdminModel.findOne({ username });
       if (adminExists) {
-        const token = jwtToken({ id: adminExists._id, username });
+        const token = adminExists.generateJWT();
         if (token) {
           res.status(200).json({ msg: "Authentication successful", token });
         } else {
