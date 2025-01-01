@@ -2,6 +2,8 @@ const path = require("path");
 const fs = require("fs");
 
 const express = require("express");
+const cors = require("cors");
+
 require("dotenv").config();
 
 const { connectToMongo } = require("./db.config.js");
@@ -29,6 +31,7 @@ if (process.env.NODE_ENV === "production") {
 // Middlewares to parse json and form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 // Admin routes
 app.use("/api/admin", require("./routes/AdminRoutes.js"));

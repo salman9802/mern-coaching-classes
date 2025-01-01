@@ -44,7 +44,7 @@ const adminLogin = async (req, res, next) => {
   let err;
   try {
     if (isValidUsername && isValidPassword) {
-      const adminExists = await AdminModel.findOne({ username });
+      const adminExists = await AdminModel.findOne({ username, password });
       if (adminExists) {
         const token = adminExists.generateJWT();
         if (token) {
