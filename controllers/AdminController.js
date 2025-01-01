@@ -10,6 +10,13 @@ const adminRegister = async (req, res, next) => {
 
   let err;
   try {
+    const exists = await AdminModel.findOne({ username });
+    if (exists) {
+      err = new Error("Username already exists");
+      err.status = 400;
+      throw err;
+    }
+
     if (isValidUsername && isValidPassword) {
       const newAdmin = await new AdminModel({
         username,

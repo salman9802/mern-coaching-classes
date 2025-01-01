@@ -31,7 +31,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Admin routes
-app.use("/admin", require("./routes/AdminRoutes.js"));
+app.use("/api/admin", require("./routes/AdminRoutes.js"));
 
 // Fallback
 app.get("*", (req, res) => {
