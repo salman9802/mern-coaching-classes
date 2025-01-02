@@ -34,19 +34,16 @@ const router = createBrowserRouter(
         path='/admin'
         element={<AdminAuth element={<Navigate to='/admin/dashboard' />} />}
       />
-      <Route
-        path='/admin/login'
-        element={<AdminAuth element={<Navigate to='/admin/dashboard' />} />}
-      />
+      <Route path='/admin/login' element={<AdminLoginPage />} />
 
       <Route
         path='/admin/dashboard/'
         element={<AdminAuth element={<AdminDashboardLayout />} />}>
-        <Route index element={<AdminHomePage />} />
-        <Route
+        <Route index element={<AdminAuth element={<AdminHomePage />} />} />
+        {/* <Route
           path='contacts'
           element={<AdminAuth element={<AdminContactsPage />} />}
-        />
+        /> */}
         <Route
           path='settings'
           element={<AdminAuth element={<AdminSettingsPage />} />}
