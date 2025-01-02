@@ -22,7 +22,7 @@ const Carousel = ({ items }) => {
   };
 
   useEffect(() => {
-    const carouselInterval = setInterval(nextItem, 2500);
+    const carouselInterval = setInterval(nextItem, 3500);
     return () => {
       clearInterval(carouselInterval);
     };
