@@ -1,26 +1,48 @@
 import React, { useEffect, useState } from "react";
+import { getToken } from "../../components/admin/AdminAuth";
 
 const HomePage = () => {
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
-    // (async () => {
-    //   // await fetch("/api/")
-    // })();
-    setContacts([
-      {
-        name: "John Doe",
-        mobile: "+915555555555",
-        city: "Pune City",
-        class: "10",
-      },
-      {
-        name: "Jane Doe",
-        mobile: "+917899878765",
-        city: "Mumbai",
-        class: "12",
-      },
-    ]);
+    (async () => {
+      const res = await fetch("/api/admin/contacts/all", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      });
+      // console.log(await res.json());
+
+      if (res.status < 500) {
+        const json = await res.json();
+        // console.log(res.ok);
+        // console.log(json);
+
+        if (res.ok) {
+          setContacts(json.contacts);
+        } else {
+          alert(json.msg);
+        }
+      } else {
+        alert("Server Error. Try again later!");
+      }
+    })();
+
+    // setContacts([
+    //   {
+    //     name: "John Doe",
+    //     mobile: "+915555555555",
+    //     city: "Pune City",
+    //     class: "10",
+    //   },
+    //   {
+    //     name: "Jane Doe",
+    //     mobile: "+917899878765",
+    //     city: "Mumbai",
+    //     class: "12",
+    //   },
+    // ]);
   }, []);
 
   return (
@@ -50,7 +72,7 @@ const HomePage = () => {
                 {contact.city}
               </td>
               <td className='px-5 py-2 border border-gray-400'>
-                {contact.class}
+                {contact.educationClass}
               </td>
             </tr>
           ))}

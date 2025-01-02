@@ -1,8 +1,12 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
+const getToken = () => {
+  return localStorage.getItem("adjwtok");
+};
+
 const isValidToken = () => {
-  if (localStorage.getItem("adjwtok") == null) return false;
+  if (getToken() == null) return false;
 
   const token = localStorage.getItem("adjwtok");
   const payload = token.split(".")[1];
@@ -19,4 +23,4 @@ const AdminAuth = ({ element }) => {
   return isValidToken() ? element : <Navigate to='/admin/login' />;
 };
 
-export default AdminAuth;
+export { AdminAuth as default, getToken, isValidToken };
