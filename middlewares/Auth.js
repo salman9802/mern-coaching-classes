@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const jwtAuth = (req, res, next) => {
+const AdminAuth = (req, res, next) => {
   const headerValue = req.header("Authorization");
   let err = undefined;
 
@@ -37,5 +37,5 @@ const jwtAuth = (req, res, next) => {
 };
 
 module.exports = {
-  jwtAuth,
+  AdminAuth,
 };

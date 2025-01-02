@@ -96,7 +96,6 @@ const addContact = async (req, res, next) => {
         educationClass,
       });
       newContact.save();
-      next();
       res
         .status(201)
         .json({ msg: "Contact added succesfully", id: newContact._id });
