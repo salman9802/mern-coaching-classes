@@ -2,8 +2,6 @@ import React from "react";
 import logo from "./../assets/logo.jpg";
 
 const Achievers = ({ students }) => {
-  console.log(students);
-
   return (
     <div className='container p-3 mx-auto flex flex-col lg:w-1/2'>
       {/* heading */}
@@ -14,8 +12,10 @@ const Achievers = ({ students }) => {
       <div className='p-4 flex flex-col container items-center text-center md:flex-row md:flex-wrap md:gap-4 md:justify-center'>
         {/* Achiever */}
         {students &&
-          students.map((student) => (
-            <div className='flex flex-col p-3 justify-center md:p-5'>
+          students.map((student, index) => (
+            <div
+              key={index}
+              className='flex flex-col p-3 justify-center md:p-5'>
               <img
                 src={student.image}
                 alt='image'

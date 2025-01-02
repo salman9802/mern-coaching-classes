@@ -4,6 +4,7 @@ import {
   Route,
   createRoutesFromElements,
   RouterProvider,
+  Navigate,
 } from "react-router-dom";
 import MainLayout from "./pages/layouts/MainLayout";
 import HomePage from "./pages/HomePage";
@@ -11,16 +12,47 @@ import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import FreeResourcesPage from "./pages/FreeResourcesPage";
 import CoursesPage from "./pages/CoursesPage";
+import AdminLoginPage from "./pages/admin/AdminLoginPage";
+import AdminDashboardLayout from "./pages/layouts/AdminDashboardLayout";
+import AdminHomePage from "./pages/admin/AdminHomePage";
+import AdminSettingsPage from "./pages/admin/AdminSettingsPage";
+import AdminContactsPage from "./pages/admin/AdminContactsPage";
+import AdminAuth from "./components/admin/AdminAuth";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<MainLayout />}>
-      <Route index element={<HomePage />} />
-      <Route path='/about' element={<AboutPage />} />
-      <Route path='/contact' element={<ContactPage />} />
-      <Route path='/free-resources' element={<FreeResourcesPage />} />
-      <Route path='/courses' element={<CoursesPage />} />
-    </Route>
+    <>
+      <Route path='/' element={<MainLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path='/about' element={<AboutPage />} />
+        <Route path='/contact' element={<ContactPage />} />
+        <Route path='/free-resources' element={<FreeResourcesPage />} />
+        <Route path='/courses' element={<CoursesPage />} />
+      </Route>
+
+      <Route
+        path='/admin'
+        element={<AdminAuth element={<Navigate to='/admin/dashboard' />} />}
+      />
+      <Route
+        path='/admin/login'
+        element={<AdminAuth element={<Navigate to='/admin/dashboard' />} />}
+      />
+
+      <Route
+        path='/admin/dashboard/'
+        element={<AdminAuth element={<AdminDashboardLayout />} />}>
+        <Route index element={<AdminHomePage />} />
+        <Route
+          path='contacts'
+          element={<AdminAuth element={<AdminContactsPage />} />}
+        />
+        <Route
+          path='settings'
+          element={<AdminAuth element={<AdminSettingsPage />} />}
+        />
+      </Route>
+    </>
   )
 );
 

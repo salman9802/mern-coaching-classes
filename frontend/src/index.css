@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer utilities {
-  /* html, */
+  html,
   body {
     overflow-x: hidden;
   }
