@@ -22,6 +22,9 @@ const jwtAuth = (req, res, next) => {
         if (err instanceof jwt.TokenExpiredError) {
           err = new Error("Token Expired");
           err.status = 400;
+        } else if (err instanceof jwt.JsonWebTokenError) {
+          err = new Error("Invalid Token");
+          err.status = 400;
         }
         throw err;
       }

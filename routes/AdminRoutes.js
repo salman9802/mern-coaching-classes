@@ -12,4 +12,7 @@ adminRoutes.post("/register", AdminController.adminRegister);
 
 adminRoutes.post("/login", AdminController.adminLogin);
 
+adminRoutes.get("/contacts/all", jwtAuth, AdminController.fetchContacts);
+adminRoutes.post("/contacts", jwtAuth, AdminController.addContact);
+
 module.exports = adminRoutes;

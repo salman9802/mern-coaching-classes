@@ -1,5 +1,8 @@
 const { jwtToken } = require("../middlewares/Auth");
 const AdminModel = require("../models/AdminModel");
+const ContactModel = require("../models/ContactModel");
+
+const isValidString = (s) => typeof s === "string" && s.trim().length > 0;
 
 const adminRegister = async (req, res, next) => {
   const { username, password } = req.body;
@@ -68,7 +71,48 @@ const adminLogin = async (req, res, next) => {
   }
 };
 
+const fetchContacts = async (req, res, next) => {
+  try {
+    const contacts = await ContactModel.find();
+    res.status(200).json({ contacts });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const addContact = async (req, res, next) => {
+  try {
+    const { name, mobile, city, educationClass } = req.body;
+    if (
+      isValidString(name) &&
+      isValidString(mobile) &&
+      isValidString(city) &&
+      isValidString(educationClass)
+    ) {
+      const newContact = new ContactModel({
+        name,
+        mobile,
+        city,
+        educationClass,
+      });
+      newContact.save();
+      next();
+      res
+        .status(201)
+        .json({ msg: "Contact added succesfully", id: newContact._id });
+    } else {
+      const err = new Error("Invalid body");
+      err.status = 400;
+      throw err;
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   adminRegister,
   adminLogin,
+  fetchContacts,
+  addContact,
 };
