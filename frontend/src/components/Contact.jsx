@@ -1,18 +1,38 @@
 import React, { useState } from "react";
 
-const BookVisit = () => {
+const Contact = () => {
   const defaultFormData = {
     name: "",
-    number: "",
+    mobile: "",
     city: "",
-    class: "",
+    educationClass: "",
   };
   const [formData, setFormData] = useState(defaultFormData);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     console.log(formData);
+
+    (async () => {
+      const res = await fetch("/api/admin/contacts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (res.status < 500) {
+        if (res.ok) {
+          alert("Thank you for contacting us. We'll get in touch.");
+          e.target.reset();
+        } else {
+          const json = await res.json();
+          alert(json.msg);
+        }
+      } else {
+        alert("Internal server error! Try again later!");
+      }
+    })();
   };
 
   const handleChange = (e) => {
@@ -44,8 +64,8 @@ const BookVisit = () => {
           <input
             className='border border-gray-300 px-3 py-1 md:px-5 md:py-3 focus:outline-accent-500'
             type='text'
-            name='number'
-            id='number'
+            name='mobile'
+            id='mobile'
             placeholder='Enter your mobile number'
             onChange={handleChange}
           />
@@ -60,8 +80,8 @@ const BookVisit = () => {
           <input
             className='border border-gray-300 px-3 py-1 md:px-5 md:py-3 focus:outline-accent-500'
             type='text'
-            name='class'
-            id='class'
+            name='educationClass'
+            id='educationClass'
             placeholder='Enter your class'
             onChange={handleChange}
           />
@@ -76,4 +96,4 @@ const BookVisit = () => {
   );
 };
 
-export default BookVisit;
+export default Contact;

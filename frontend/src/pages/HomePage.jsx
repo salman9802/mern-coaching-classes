@@ -4,7 +4,7 @@ import slide1 from "../assets/slides/slide1.jpg";
 import slide2 from "../assets/slides/slide2.jpg";
 import CoursesComponent from "../components/CoursesComponent";
 import Achievers from "../components/Achievers";
-import BookVisit from "../components/BookVisit";
+import Contact from "../components/Contact";
 import Impact from "../components/Impact";
 
 import student1 from "../assets/students/student1.webp";
@@ -56,7 +56,7 @@ const HomePage = () => {
       <Impact impactValues={impactValues} />
       <CoursesComponent />
       <Achievers students={students} />
-      <BookVisit />
+      <Contact />
     </>
   );
 };
