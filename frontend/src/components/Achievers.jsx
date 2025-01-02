@@ -19,7 +19,7 @@ const Achievers = ({ students }) => {
               <img
                 src={student.image}
                 alt='image'
-                className='w-40 h-40 object-center object-contain'
+                className='w-24 h-24 rounded-full object-center object-cover'
               />
               <div className='flex flex-col'>
                 <div className='text-xl font-semibold md:text-2xl lg:text-3xl'>

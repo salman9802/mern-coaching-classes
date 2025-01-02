@@ -7,9 +7,9 @@ import Achievers from "../components/Achievers";
 import Contact from "../components/Contact";
 import Impact from "../components/Impact";
 
-import student1 from "../assets/students/student1.webp";
-import student2 from "../assets/students/student2.jpg";
-import student3 from "../assets/students/student3.webp";
+import student1 from "../assets/students/student1.png";
+import student2 from "../assets/students/student2.jpeg";
+import student3 from "../assets/students/student3.jpeg";
 import student4 from "../assets/students/student4.webp";
 import student5 from "../assets/students/student5.jpg";
 
