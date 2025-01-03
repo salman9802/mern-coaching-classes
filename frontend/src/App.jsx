@@ -17,7 +17,7 @@ import AdminDashboardLayout from "./pages/layouts/AdminDashboardLayout";
 import AdminHomePage from "./pages/admin/AdminHomePage";
 import AdminSettingsPage from "./pages/admin/AdminSettingsPage";
 import AdminContactsPage from "./pages/admin/AdminContactsPage";
-import AdminAuth from "./components/admin/AdminAuth";
+import AdminAuth, { isValidToken } from "./components/admin/AdminAuth";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,16 +34,25 @@ const router = createBrowserRouter(
         path='/admin'
         element={<AdminAuth element={<Navigate to='/admin/dashboard' />} />}
       />
-      <Route path='/admin/login' element={<AdminLoginPage />} />
+      <Route
+        path='/admin/login'
+        element={
+          isValidToken() ? (
+            <Navigate to='/admin/dashboard' />
+          ) : (
+            <AdminLoginPage />
+          )
+        }
+      />
 
       <Route
         path='/admin/dashboard/'
         element={<AdminAuth element={<AdminDashboardLayout />} />}>
         <Route index element={<AdminAuth element={<AdminHomePage />} />} />
-        {/* <Route
+        <Route
           path='contacts'
           element={<AdminAuth element={<AdminContactsPage />} />}
-        /> */}
+        />
         <Route
           path='settings'
           element={<AdminAuth element={<AdminSettingsPage />} />}

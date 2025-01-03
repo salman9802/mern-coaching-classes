@@ -8,7 +8,7 @@ const AdminDashboardLayout = () => {
 
   const navLinkClasses = ({ isActive }) => {
     return (
-      "px-3 py-1 text-white rounded-sm focus:outline-primary-500 " +
+      "px-3 py-1 text-white rounded-sm focus:outline-primary-500 hover:bg-gray-100/20 " +
       (isActive ? "bg-gray-100/30" : "") +
       " md:px-5 md:py-2 lg:px-7"
     );
@@ -28,7 +28,10 @@ const AdminDashboardLayout = () => {
         </h2>
         {/* Navigation */}
         <div className='flex flex-col space-y-3'>
-          <NavLink to='/admin/dashboard' end className={navLinkClasses}>
+          <NavLink
+            to='/admin/dashboard/contacts'
+            end
+            className={navLinkClasses}>
             Contacts
           </NavLink>
           <NavLink to='/admin/dashboard/settings' className={navLinkClasses}>
