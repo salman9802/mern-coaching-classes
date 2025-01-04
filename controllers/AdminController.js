@@ -141,6 +141,18 @@ const fetchAllAdmins = async (req, res, next) => {
   }
 };
 
+const deleteAdmin = async (req, res, next) => {
+  try {
+    const { id } = req.body;
+    if (isValidString(id)) {
+      const result = await AdminModel.deleteOne({ _id: id });
+      res.status(200).json({ result, id });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   adminRegister,
   adminLogin,
@@ -148,4 +160,5 @@ module.exports = {
   addContact,
   deleteContacts,
   fetchAllAdmins,
+  deleteAdmin,
 };

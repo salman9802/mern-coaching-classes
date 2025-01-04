@@ -18,7 +18,6 @@ const AdminAdminsPage = () => {
       if (res.status < 500) {
         const json = await res.json();
         if (res.ok) {
-          // By default, none are checked
           setAdmins(json.admins);
         } else {
           alert(json.msg);
@@ -28,6 +27,30 @@ const AdminAdminsPage = () => {
       }
     })();
   }, []);
+
+  const handleAdminDelete = (id) => {
+    (async () => {
+      const res = await fetch("/api/admin/admins", {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id }),
+      });
+      if (res.status < 500) {
+        const json = await res.json();
+        if (res.ok) {
+          setAdmins((prev) => [...prev.filter((a) => a._id !== id)]);
+          alert("Deleted succesfully");
+        } else {
+          alert(json.msg);
+        }
+      } else {
+        alert("Internal server error");
+      }
+    })();
+  };
 
   if (admins.length > 0) {
     return (
@@ -42,7 +65,7 @@ const AdminAdminsPage = () => {
                 ID
               </th>
               <th className='text-xs md:text-base px-3 py-1 md:px-5 md:py-2 border-gray-300 border-b border-t'>
-                Role
+                type
               </th>
               <th className='text-xs md:text-base px-3 py-1 md:px-5 md:py-2 border-gray-300 border-b border-t'>
                 Username
@@ -57,7 +80,11 @@ const AdminAdminsPage = () => {
           </thead>
           <tbody>
             {admins.map((admin, index) => (
-              <AdminEntry key={index} admin={admin} />
+              <AdminEntry
+                key={index}
+                admin={admin}
+                handleAdminDelete={handleAdminDelete}
+              />
             ))}
           </tbody>
         </table>

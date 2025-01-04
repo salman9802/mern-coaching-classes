@@ -11,7 +11,7 @@ const adminSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    role: {
+    type: {
       type: String,
       enum: ["root", "nonroot"],
       default: "nonroot",

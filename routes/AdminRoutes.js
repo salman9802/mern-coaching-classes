@@ -20,5 +20,6 @@ adminRoutes.delete(
   AdminController.deleteContacts
 );
 adminRoutes.get("/admins", AdminAuth, AdminController.fetchAllAdmins);
+adminRoutes.delete("/admins", AdminAuth, AdminController.deleteAdmin);
 
 module.exports = adminRoutes;
