@@ -14,5 +14,6 @@ adminRoutes.post("/login", AdminController.adminLogin);
 
 adminRoutes.get("/contacts/all", AdminAuth, AdminController.fetchContacts);
 adminRoutes.post("/contacts", AdminController.addContact);
+adminRoutes.delete("/contacts/delete", AdminController.deleteContacts);
 
 module.exports = adminRoutes;

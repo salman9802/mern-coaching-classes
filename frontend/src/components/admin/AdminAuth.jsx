@@ -1,14 +1,20 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
+const TOKEN_NAME = "adjwtok";
+
 const getToken = () => {
-  return localStorage.getItem("adjwtok");
+  return localStorage.getItem(TOKEN_NAME);
+};
+
+const setToken = (token) => {
+  localStorage.setItem(TOKEN_NAME, token);
 };
 
 const isValidToken = () => {
   if (getToken() == null) return false;
 
-  const token = localStorage.getItem("adjwtok");
+  const token = localStorage.getItem(TOKEN_NAME);
   const payload = token.split(".")[1];
 
   // Decode base 64 and parse resultant string into object
@@ -23,4 +29,4 @@ const AdminAuth = ({ element }) => {
   return isValidToken() ? element : <Navigate to='/admin/login' />;
 };
 
-export { AdminAuth as default, getToken, isValidToken };
+export { AdminAuth as default, getToken, isValidToken, setToken };

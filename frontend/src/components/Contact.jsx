@@ -11,7 +11,6 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
 
     (async () => {
       const res = await fetch("/api/admin/contacts", {

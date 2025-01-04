@@ -109,9 +109,33 @@ const addContact = async (req, res, next) => {
   }
 };
 
+const deleteContacts = async (req, res, next) => {
+  try {
+    const { ids: contactIds } = req.body;
+
+    if (Array.isArray(contactIds) && contactIds.length > 0) {
+      const results = await ContactModel.deleteMany({
+        _id: { $in: contactIds },
+      });
+
+      res.status(200).json({ msg: "Contacts deleted succesfully" });
+      // if (results.deletedCount > 0)
+      //   res.status(202).json({ msg: "Contacts deleted succesfully" });
+      // else res.status(200).json({ msg: "No contacts found" });
+    } else {
+      const err = new Error("Invalid syntax.");
+      err.status = 400;
+      throw err;
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   adminRegister,
   adminLogin,
   fetchContacts,
   addContact,
+  deleteContacts,
 };
