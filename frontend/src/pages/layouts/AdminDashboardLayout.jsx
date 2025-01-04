@@ -70,14 +70,14 @@ const AdminDashboardLayout = () => {
           !openHamburger && "hidden"
         }`}></div>
 
-      {/* Hamburger */}
-      <button
-        className='pt-5 pl-5 h-min text-xl justify-start md:hidden'
-        onClick={handleHamburgerClick}>
-        <RxHamburgerMenu />
-      </button>
       {/* Content */}
       <div className='w-full bg-slate-100/50 min-h-[150vh] md:ml-64'>
+        {/* Hamburger */}
+        <button
+          className='pt-3 pl-3 h-min text-xl justify-start sm:pt-3 sm:pl-3 md:hidden'
+          onClick={handleHamburgerClick}>
+          <RxHamburgerMenu />
+        </button>
         <Outlet />
       </div>
     </div>

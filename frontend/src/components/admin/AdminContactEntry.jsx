@@ -16,16 +16,16 @@ const AdminContactEntry = ({ contact, checks, index, handleChecks }) => {
           name='chk'
         />
       </td>
-      <td className='px-5 py-2 border-gray-300 border-b border-t'>
+      <td className='px-3 py-1 md:px-5 md:py-2 border-gray-300 border-b border-t'>
         {contact.name}
       </td>
-      <td className='px-5 py-2 border-gray-300 border-b border-t'>
+      <td className='px-3 py-1 md:px-5 md:py-2 border-gray-300 border-b border-t'>
         {contact.mobile}
       </td>
-      <td className='px-5 py-2 border-gray-300 border-b border-t'>
+      <td className='px-3 py-1 md:px-5 md:py-2 border-gray-300 border-b border-t'>
         {contact.city}
       </td>
-      <td className='px-5 py-2 border-gray-300 border-b border-t'>
+      <td className='px-3 py-1 md:px-5 md:py-2 border-gray-300 border-b border-t'>
         {contact.educationClass}
       </td>
     </tr>
