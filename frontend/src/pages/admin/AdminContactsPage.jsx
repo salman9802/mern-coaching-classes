@@ -100,9 +100,9 @@ const AdminContactsPage = () => {
         <table className='w-11/12 border-collapse'>
           <thead>
             <tr>
-              <td className='px-3 py-2'>
+              <td className='px-3 py-1 md:px-5 md:py-2'>
                 <button onClick={handleDelete}>
-                  <MdDelete className='text-red-500 w-6 h-6' />
+                  <MdDelete className='text-red-500 w-4 h-4 md:w-6 md:h-6' />
                 </button>
               </td>
               <td className='px-3 py-1 md:px-5 md:py-2'></td>
@@ -111,9 +111,9 @@ const AdminContactsPage = () => {
               <td className='px-3 py-1 md:px-5 md:py-2'></td>
             </tr>
             <tr className='text-accent-500 text-left'>
-              <th className='px-5 py-2 border-gray-300 border-b border-t'>
+              <th className='px-3 py-1 md:px-5 md:py-2 border-gray-300 border-b border-t'>
                 <input
-                  className='accent-red-500'
+                  className='accent-accent-700'
                   onChange={handleMainCheck}
                   checked={mainCheck}
                   type='checkbox'
@@ -121,16 +121,16 @@ const AdminContactsPage = () => {
                   id='main-chk'
                 />
               </th>
-              <th className='px-3 py-1 md:px-5 md:py-2 border-gray-300 border-b border-t'>
+              <th className='text-xs md:text-base px-3 py-1 md:px-5 md:py-2 border-gray-300 border-b border-t'>
                 Name
               </th>
-              <th className='px-3 py-1 md:px-5 md:py-2 border-gray-300 border-b border-t'>
+              <th className='text-xs md:text-base px-3 py-1 md:px-5 md:py-2 border-gray-300 border-b border-t'>
                 Mobile
               </th>
-              <th className='px-3 py-1 md:px-5 md:py-2 border-gray-300 border-b border-t'>
+              <th className='text-xs md:text-base px-3 py-1 md:px-5 md:py-2 border-gray-300 border-b border-t'>
                 City
               </th>
-              <th className='px-3 py-1 md:px-5 md:py-2 border-gray-300 border-b border-t'>
+              <th className='text-xs md:text-base px-3 py-1 md:px-5 md:py-2 border-gray-300 border-b border-t'>
                 Class
               </th>
             </tr>

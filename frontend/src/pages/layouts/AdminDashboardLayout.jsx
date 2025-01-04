@@ -53,12 +53,16 @@ const AdminDashboardLayout = () => {
         {/* Navigation */}
         <div className='flex flex-col space-y-3'>
           <NavLink
+            onClick={handleHamburgerCloseClick}
             to='/admin/dashboard/contacts'
             end
             className={navLinkClasses}>
             Contacts
           </NavLink>
-          <NavLink to='/admin/dashboard/settings' className={navLinkClasses}>
+          <NavLink
+            onClick={handleHamburgerCloseClick}
+            to='/admin/dashboard/settings'
+            className={navLinkClasses}>
             Settings
           </NavLink>
         </div>
