@@ -132,10 +132,20 @@ const deleteContacts = async (req, res, next) => {
   }
 };
 
+const fetchAllAdmins = async (req, res, next) => {
+  try {
+    const admins = await AdminModel.find();
+    res.status(200).json({ admins });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   adminRegister,
   adminLogin,
   fetchContacts,
   addContact,
   deleteContacts,
+  fetchAllAdmins,
 };

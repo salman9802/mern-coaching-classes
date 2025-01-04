@@ -61,6 +61,12 @@ const AdminDashboardLayout = () => {
           </NavLink>
           <NavLink
             onClick={handleHamburgerCloseClick}
+            to='/admin/dashboard/admins'
+            className={navLinkClasses}>
+            Admins
+          </NavLink>
+          <NavLink
+            onClick={handleHamburgerCloseClick}
             to='/admin/dashboard/settings'
             className={navLinkClasses}>
             Settings

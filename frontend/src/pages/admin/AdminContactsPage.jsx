@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
 
 import { getToken } from "../../components/admin/AdminAuth";
-import AdminContactEntry from "../../components/admin/AdminContactEntry";
+import ContactEntry from "../../components/admin/ContactEntry";
 
 const AdminContactsPage = () => {
   const [contacts, setContacts] = useState([]);
@@ -137,7 +137,7 @@ const AdminContactsPage = () => {
           </thead>
           <tbody>
             {contacts.map((contact, index) => (
-              <AdminContactEntry
+              <ContactEntry
                 key={index}
                 contact={contact}
                 checks={checks}

@@ -18,6 +18,7 @@ import AdminHomePage from "./pages/admin/AdminHomePage";
 import AdminSettingsPage from "./pages/admin/AdminSettingsPage";
 import AdminContactsPage from "./pages/admin/AdminContactsPage";
 import AdminAuth, { isValidToken } from "./components/admin/AdminAuth";
+import ManageAdminsPage from "./pages/admin/ManageAdminsPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -52,6 +53,10 @@ const router = createBrowserRouter(
         <Route
           path='contacts'
           element={<AdminAuth element={<AdminContactsPage />} />}
+        />
+        <Route
+          path='admins'
+          element={<AdminAuth element={<ManageAdminsPage />} />}
         />
         <Route
           path='settings'
