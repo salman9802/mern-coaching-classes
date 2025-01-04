@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 
+import { RxHamburgerMenu } from "react-icons/rx";
+import { IoClose } from "react-icons/io5";
+
 const AdminDashboardLayout = () => {
+  const [openHamburger, setOpenHamburger] = useState(false);
+
   const data = {
     username: "John Doe",
+  };
+
+  const handleHamburgerClick = () => {
+    setOpenHamburger(true);
+  };
+
+  const handleHamburgerCloseClick = () => {
+    setOpenHamburger(false);
   };
 
   const navLinkClasses = ({ isActive }) => {
@@ -12,20 +25,31 @@ const AdminDashboardLayout = () => {
       (isActive ? "bg-gray-100/30" : "") +
       " md:px-5 md:py-2 lg:px-7"
     );
-    // bg-white text-primary-500 hover:bg-primary-500 hover:text-white
   };
 
   return (
     <div className='w-screen flex'>
       {/* Horizontal navbar */}
-      <div className='w-64 p-5 flex flex-col space-y-5 bg-primary-500 h-screen fixed top-0 left-0 bottom-0 md:space-y-7 lg:space-y-10'>
+      <div
+        className={`-translate-x-64 ${
+          openHamburger && "-translate-x-0"
+        } w-64 p-5 flex flex-col space-y-5 bg-primary-500 h-screen fixed z-50 top-0 left-0 bottom-0 transition ease-in-out duration-200 md:-translate-x-0 md:space-y-7 lg:space-y-10`}>
         {/* Header */}
-        <h2 className='text-gray-100 flex flex-col space-y-1 text-xl md:space-y-2 md:text-2xl lg:text-3xl'>
-          Logged in as
-          <span className='text-lg text-accent-500 font-bold md:text-xl lg:text-2xl'>
-            {data.username}
-          </span>
-        </h2>
+        <div className='flex justify-between items-center'>
+          {/* User info */}
+          <h2 className='text-gray-100 flex flex-col space-y-1 text-xl md:space-y-2 md:text-2xl lg:text-3xl'>
+            Logged in as
+            <span className='text-lg text-accent-500 font-bold md:text-xl lg:text-2xl'>
+              {data.username}
+            </span>
+          </h2>
+          {/* Close Button */}
+          <button
+            className='text-white text-3xl md:hidden'
+            onClick={handleHamburgerCloseClick}>
+            <IoClose />
+          </button>
+        </div>
         {/* Navigation */}
         <div className='flex flex-col space-y-3'>
           <NavLink
@@ -39,8 +63,21 @@ const AdminDashboardLayout = () => {
           </NavLink>
         </div>
       </div>
+
+      {/* Hamburger overlay */}
+      <div
+        className={`fixed z-40 inset-0 bg-black bg-opacity-50 transition-opacity ease-in-out duration-200 ${
+          !openHamburger && "hidden"
+        }`}></div>
+
+      {/* Hamburger */}
+      <button
+        className='pt-5 pl-5 h-min text-xl justify-start md:hidden'
+        onClick={handleHamburgerClick}>
+        <RxHamburgerMenu />
+      </button>
       {/* Content */}
-      <div className='ml-64 w-full bg-slate-100/50 min-h-[150vh]'>
+      <div className='w-full bg-slate-100/50 min-h-[150vh] md:ml-64'>
         <Outlet />
       </div>
     </div>
