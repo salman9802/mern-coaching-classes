@@ -35,6 +35,11 @@ const Contact = () => {
   };
 
   const handleChange = (e) => {
+    if (
+      e.target.name === "mobile" &&
+      (e.target.value.length === 0 || isNaN(e.target.value))
+    )
+      return;
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -58,14 +63,16 @@ const Contact = () => {
             name='name'
             id='name'
             placeholder='Enter your name'
+            value={formData.name}
             onChange={handleChange}
           />
           <input
             className='border border-gray-300 px-3 py-1 md:px-5 md:py-3 focus:outline-accent-500'
-            type='text'
+            type='tel'
             name='mobile'
             id='mobile'
             placeholder='Enter your mobile number'
+            value={formData.mobile}
             onChange={handleChange}
           />
           <input
@@ -74,6 +81,7 @@ const Contact = () => {
             name='city'
             id='city'
             placeholder='Enter your city'
+            value={formData.city}
             onChange={handleChange}
           />
           <input
@@ -82,6 +90,7 @@ const Contact = () => {
             name='educationClass'
             id='educationClass'
             placeholder='Enter your class'
+            value={formData.educationClass}
             onChange={handleChange}
           />
           <button
