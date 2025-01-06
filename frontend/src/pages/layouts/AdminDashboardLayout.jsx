@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoClose } from "react-icons/io5";
-import { parseToken } from "../../components/admin/AdminAuth";
+import { IoMdLogOut } from "react-icons/io";
+
+import { deleteToken, parseToken } from "../../components/admin/AdminAuth";
 
 const AdminDashboardLayout = () => {
+  const navigate = useNavigate();
   const [openHamburger, setOpenHamburger] = useState(false);
 
   const handleHamburgerClick = () => {
@@ -14,6 +17,11 @@ const AdminDashboardLayout = () => {
 
   const handleHamburgerCloseClick = () => {
     setOpenHamburger(false);
+  };
+
+  const handleLogout = () => {
+    deleteToken();
+    navigate("/admin/login");
   };
 
   const navLinkClasses = ({ isActive }) => {
@@ -28,8 +36,8 @@ const AdminDashboardLayout = () => {
     <div className='w-screen flex'>
       {/* Horizontal navbar */}
       <div
-        className={`-translate-x-64 ${
-          openHamburger && "-translate-x-0"
+        className={`${
+          openHamburger ? "-translate-x-0" : "-translate-x-64"
         } w-64 p-5 flex flex-col space-y-5 bg-primary-500 h-screen fixed z-50 top-0 left-0 bottom-0 transition ease-in-out duration-200 md:-translate-x-0 md:space-y-7 lg:space-y-10`}>
         {/* Header */}
         <div className='flex justify-between items-center'>
@@ -45,6 +53,10 @@ const AdminDashboardLayout = () => {
             className='text-white text-3xl md:hidden'
             onClick={handleHamburgerCloseClick}>
             <IoClose />
+          </button>
+          {/* Logout Button */}
+          <button className='text-white text-3xl' onClick={handleLogout}>
+            <IoMdLogOut />
           </button>
         </div>
         {/* Navigation */}

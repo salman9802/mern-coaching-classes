@@ -28,6 +28,10 @@ const isValidToken = () => {
   return exp > Math.floor(Date.now() / 1000);
 };
 
+const deleteToken = () => {
+  localStorage.removeItem(TOKEN_NAME);
+};
+
 const isRoot = () => {
   if (!isValidToken()) return false;
 
@@ -52,4 +56,5 @@ export {
   isValidToken,
   setToken,
   parseToken,
+  deleteToken,
 };
