@@ -1,7 +1,6 @@
 import React from "react";
 
 import { MdDelete, MdEdit } from "react-icons/md";
-import { getToken } from "./AdminAuth";
 
 const AdminAdminEntry = ({ admin, handleAdminDelete }) => {
   return (

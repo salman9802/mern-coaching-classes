@@ -7,6 +7,10 @@ const getToken = () => {
   return localStorage.getItem(TOKEN_NAME);
 };
 
+const parseToken = () => {
+  return JSON.parse(atob(getToken().split(".")[1]));
+};
+
 const setToken = (token) => {
   localStorage.setItem(TOKEN_NAME, token);
 };
@@ -24,9 +28,28 @@ const isValidToken = () => {
   return exp > Math.floor(Date.now() / 1000);
 };
 
+const isRoot = () => {
+  if (!isValidToken()) return false;
+
+  const { type } = parseToken();
+  return type === "root";
+};
+
 // Function to protect admin routes
 const AdminAuth = ({ element }) => {
   return isValidToken() ? element : <Navigate to='/admin/login' />;
 };
 
-export { AdminAuth as default, getToken, isValidToken, setToken };
+// Function to protect root admin routes
+const AdminRootAuth = ({ element }) => {
+  return isRoot() ? element : <Navigate to='/admin' />;
+};
+
+export {
+  AdminAuth as default,
+  AdminRootAuth,
+  getToken,
+  isValidToken,
+  setToken,
+  parseToken,
+};

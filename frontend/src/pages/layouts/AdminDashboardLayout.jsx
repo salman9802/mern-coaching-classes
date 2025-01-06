@@ -3,13 +3,10 @@ import { NavLink, Outlet } from "react-router-dom";
 
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoClose } from "react-icons/io5";
+import { parseToken } from "../../components/admin/AdminAuth";
 
 const AdminDashboardLayout = () => {
   const [openHamburger, setOpenHamburger] = useState(false);
-
-  const data = {
-    username: "John Doe",
-  };
 
   const handleHamburgerClick = () => {
     setOpenHamburger(true);
@@ -40,7 +37,7 @@ const AdminDashboardLayout = () => {
           <h2 className='text-gray-100 flex flex-col space-y-1 text-xl md:space-y-2 md:text-2xl lg:text-3xl'>
             Logged in as
             <span className='text-lg text-accent-500 font-bold md:text-xl lg:text-2xl'>
-              {data.username}
+              {parseToken().username}
             </span>
           </h2>
           {/* Close Button */}

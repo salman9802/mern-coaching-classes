@@ -26,6 +26,7 @@ const adminSchema = mongoose.Schema(
 adminSchema.methods.generateJWT = function () {
   const payload = {
     username: this.username,
+    type: this.type,
   };
 
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
