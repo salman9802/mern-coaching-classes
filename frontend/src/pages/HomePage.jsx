@@ -12,6 +12,7 @@ import student2 from "../assets/students/student2.jpeg";
 import student3 from "../assets/students/student3.jpeg";
 import student4 from "../assets/students/student4.webp";
 import student5 from "../assets/students/student5.jpg";
+import MapLocation from "../components/MapLocation";
 
 const carouselItems = [
   {
@@ -50,6 +51,7 @@ const HomePage = () => {
       <CoursesComponent />
       <Achievers students={students} />
       <Contact />
+      <MapLocation />
     </>
   );
 };
