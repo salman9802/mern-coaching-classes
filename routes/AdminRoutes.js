@@ -13,7 +13,7 @@ adminRoutes.post("/register", AdminController.adminRegister);
 adminRoutes.post("/login", AdminController.adminLogin);
 
 adminRoutes.get("/contacts/all", AdminAuth, AdminController.fetchContacts);
-adminRoutes.post("/contacts", AdminAuth, AdminController.addContact);
+adminRoutes.post("/contacts", AdminController.addContact);
 adminRoutes.delete(
   "/contacts/delete",
   AdminAuth,

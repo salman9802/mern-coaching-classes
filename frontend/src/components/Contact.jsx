@@ -23,7 +23,7 @@ const Contact = () => {
       if (res.status < 500) {
         if (res.ok) {
           alert("Thank you for contacting us. We'll get in touch.");
-          e.target.reset();
+          setFormData(defaultFormData);
         } else {
           const json = await res.json();
           alert(json.msg);
@@ -47,14 +47,13 @@ const Contact = () => {
     <div className='container mx-auto p-3 flex flex-col space-y-5 lg:space-y-0 lg:flex-row lg:w-2/3'>
       {/* heading */}
       <div className='text-xl font-semibold p-3 md:text-3xl lg:mr-8'>
-        Book a visit for our{" "}
-        <span className='text-primary-500'>offline centers</span>, to get
-        personalized help
+        Contact us to get{" "}
+        <span className='text-primary-500'>personalized help</span>
       </div>
       {/* Form */}
       <div className='flex flex-col space-y-3 p-3 md:space-y-5'>
         <div className='text-center font-semibold md:text-3xl'>
-          Share your information to book a visit
+          Share your information, to get in touch
         </div>
         <form className='flex flex-col space-y-5' onSubmit={handleSubmit}>
           <input
@@ -96,7 +95,7 @@ const Contact = () => {
           <button
             className='bg-accent-300 rounded-lg px-3 py-1 md:px-5 md:py-3 hover:bg-white hover:text-accent-300 hover:border hover:border-accent-300 focus:outline-accent-500'
             type='submit'>
-            Book a visit
+            Contact us
           </button>
         </form>
       </div>
