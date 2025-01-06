@@ -8,7 +8,7 @@ adminRoutes.get("/", AdminAuth, (req, res) => {
   res.send("admined");
 });
 
-adminRoutes.post("/register", AdminController.adminRegister);
+adminRoutes.post("/register", AdminAuth, AdminController.adminRegister);
 
 adminRoutes.post("/login", AdminController.adminLogin);
 

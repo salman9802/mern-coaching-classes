@@ -6,7 +6,7 @@ import {
   RouterProvider,
   Navigate,
 } from "react-router-dom";
-import MainLayout from "./pages/layouts/MainLayout";
+import HomeLayout from "./pages/layouts/HomeLayout";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
@@ -26,7 +26,7 @@ import ManageAdminsPage from "./pages/admin/ManageAdminsPage";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path='/' element={<MainLayout />}>
+      <Route path='/' element={<HomeLayout />}>
         <Route index element={<HomePage />} />
         <Route path='/about' element={<AboutPage />} />
         <Route path='/contact' element={<ContactPage />} />
