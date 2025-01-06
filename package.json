@@ -7,7 +7,7 @@
     "install-all": "npm install && npm install --prefix frontend --no-save",
     "build": "npm run install-all && npm run build --prefix frontend",
     "start": "node server.js",
-    "start+build": "npm run install-all && npm run build --prefix frontend && echo Build Complete. Starting server... && node server.js",
+    "build+start": "npm run install-all && npm run build --prefix frontend && echo Build Complete. Starting server... && node server.js",
     "dev:server": "nodemon server.js",
     "dev:client": "npm run dev --prefix frontend",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
