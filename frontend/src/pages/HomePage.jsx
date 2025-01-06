@@ -13,13 +13,6 @@ import student3 from "../assets/students/student3.jpeg";
 import student4 from "../assets/students/student4.webp";
 import student5 from "../assets/students/student5.jpg";
 
-// const carouselItems = [
-//   <img src='https://via.placeholder.com/500x300?text=Image+1' alt='1' />,
-//   <img src='https://via.placeholder.com/500x300?text=Image+2' alt='2' />,
-//   <div style={{ fontSize: "24px" }}>This is some text content.</div>,
-//   <img src='https://via.placeholder.com/500x300?text=Image+3' alt='3' />,
-// ];
-
 const carouselItems = [
   {
     src: slide1,

@@ -8,7 +8,7 @@ const Impact = ({ impactValues }) => {
         OUR IMPACT
       </div>
       {/* Statistics */}
-      <div className='mx-auto rounded-md bg-primary-500/10 px-3 py-2 grid grid-cols-2 gap-2 md:flex md:space-y-0 md:space-x-5 md:flex-row md:px-5 md:py-3 lg:px-7 lg:py-5'>
+      <div className='mx-auto rounded-md bg-primary-500/50 px-3 py-2 grid grid-cols-2 gap-2 md:flex md:space-y-0 md:space-x-5 md:flex-row md:px-5 md:py-3 lg:px-7 lg:py-5'>
         <div className='px-3 py-2 md:px-5 md:py-3 lg:px-7 lg:py-5'>
           <ImpactCounter
             targetValue={impactValues.students}
@@ -48,8 +48,8 @@ const Impact = ({ impactValues }) => {
       <div className='container mx-auto px-3 py-2 flex flex-col justify-center items-center space-y-3 lg:w-11/12 md:flex-row md:space-y-0 md:space-x-5 md:px-5 md:py-3 lg:px-7 lg:py-5'>
         <div className='text-lg font-semibold md:font-bold md:text-2xl lg:text-3xl'>
           Rathod Coaching classes is now{" "}
-          <span className='text-primary-500'>25years</span> old, having 6
-          branches all over India
+          <span className='text-primary-500'>25years</span> old, having{" "}
+          {impactValues.branches} branches all over India
         </div>
         <div className='md:text-lg lg:text-xl'>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem quo
