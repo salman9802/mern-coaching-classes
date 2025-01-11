@@ -1,6 +1,6 @@
 const { jwtToken } = require("../middlewares/Auth");
-const AdminModel = require("../models/AdminModel");
-const ContactModel = require("../models/ContactModel");
+const AdminModel = require("../models/admin.model");
+const ContactModel = require("../models/contact.model");
 
 const isValidString = (s) => typeof s === "string" && s.trim().length > 0;
 

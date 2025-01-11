@@ -34,7 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 // Admin routes
-app.use("/api/admin", require("./routes/AdminRoutes.js"));
+app.use("/api/admin", require("./routes/admin.route.js"));
 
 // Fallback
 app.get("*", (req, res) => {
