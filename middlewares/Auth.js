@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const { STATUS_CODES } = require("../constants/http");
 
 const AdminAuth = (req, res, next) => {
   const headerValue = req.header("Authorization");
@@ -7,12 +8,12 @@ const AdminAuth = (req, res, next) => {
   try {
     if (!headerValue) {
       err = new Error("Token not found!");
-      err.status = 400;
+      err.status = STATUS_CODES.BAD_REQUEST;
       throw err;
     }
     if (!headerValue.startsWith("Bearer")) {
       err = new Error("Invalid Token");
-      err.status = 400;
+      err.status = STATUS_CODES.BAD_REQUEST;
       throw err;
     }
 
@@ -21,10 +22,10 @@ const AdminAuth = (req, res, next) => {
       if (err) {
         if (err instanceof jwt.TokenExpiredError) {
           err = new Error("Token Expired");
-          err.status = 400;
+          err.status = STATUS_CODES.BAD_REQUEST;
         } else if (err instanceof jwt.JsonWebTokenError) {
           err = new Error("Invalid Token");
-          err.status = 400;
+          err.status = STATUS_CODES.BAD_REQUEST;
         }
         throw err;
       }

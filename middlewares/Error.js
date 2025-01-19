@@ -1,5 +1,9 @@
+const { STATUS_CODES } = require("../constants/http");
+
 const errorHandler = (err, req, res, next) => {
-  const statusCode = err.status ? err.status : 500;
+  const statusCode = err.status
+    ? err.status
+    : STATUS_CODES.INTERNAL_SERVER_ERROR;
 
   res.status(statusCode).json({
     ok: false,
