@@ -1,9 +1,10 @@
 const express = require("express");
-const { AdminAuth } = require("../middlewares/Auth");
+const { AdminAuth } = require("../middlewares/auth.middleware.js");
 const AdminController = require("../controllers/admin.controller.js");
 
 const adminRoutes = express.Router();
 
+// Prefix: /api/admin
 adminRoutes.get("/", AdminAuth, (req, res) => {
   res.send("admined");
 });

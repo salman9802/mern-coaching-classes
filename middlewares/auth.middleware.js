@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { STATUS_CODES } = require("../constants/http");
+const { STATUS_CODES } = require("../constants/http.js");
 
 const AdminAuth = (req, res, next) => {
   const headerValue = req.header("Authorization");

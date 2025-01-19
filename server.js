@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== "production") require("dotenv").config();
 
 const { connectToMongo } = require("./db.config.js");
 connectToMongo();
-const { errorHandler } = require("./middlewares/Error.js");
+const { errorHandler } = require("./middlewares/error.middleware.js");
 
 const PORT = process.env.PORT || 80;
 const app = express();

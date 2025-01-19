@@ -1,4 +1,4 @@
-const { STATUS_CODES } = require("../constants/http");
+const { STATUS_CODES } = require("../constants/http.js");
 
 const errorHandler = (err, req, res, next) => {
   const statusCode = err.status

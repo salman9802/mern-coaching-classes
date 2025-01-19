@@ -1,7 +1,7 @@
 const { STATUS_CODES } = require("../constants/http");
-const { jwtToken } = require("../middlewares/Auth");
-const AdminModel = require("../models/admin.model");
-const ContactModel = require("../models/contact.model");
+const { jwtToken } = require("../middlewares/auth.middleware.js");
+const AdminModel = require("../models/admin.model.js");
+const ContactModel = require("../models/contact.model.js");
 
 const isValidString = (s) => typeof s === "string" && s.trim().length > 0;
 
