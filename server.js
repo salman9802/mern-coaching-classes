@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== "production") require("dotenv").config();
 
 const { connectToMongo } = require("./db.config.js");
 connectToMongo();
-const { errorHandler } = require("./middlewares/error.middleware.js");
+const { errorMiddleware } = require("./middlewares/error.middleware.js");
 
 const PORT = process.env.PORT || 80;
 const app = express();
@@ -42,7 +42,7 @@ app.get("*", (req, res) => {
 });
 
 // Custom error handling middleware
-app.use(errorHandler);
+app.use(errorMiddleware);
 
 app.listen(PORT, ["localhost", process.env.LOCAL_IP], () => {
   console.log(`Server started at http://localhost:${PORT}`);

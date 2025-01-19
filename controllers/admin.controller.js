@@ -2,6 +2,7 @@ const { STATUS_CODES } = require("../constants/http");
 const { jwtToken } = require("../middlewares/auth.middleware.js");
 const AdminModel = require("../models/admin.model.js");
 const ContactModel = require("../models/contact.model.js");
+const { errorAssert } = require("../utils/error.js");
 
 const isValidString = (s) => typeof s === "string" && s.trim().length > 0;
 
@@ -12,30 +13,21 @@ const adminRegister = async (req, res, next) => {
   const isValidPassword =
     typeof password === "string" && password.trim().length > 0;
 
-  let err;
-  try {
-    const exists = await AdminModel.findOne({ username });
-    if (exists) {
-      err = new Error("Username already exists");
-      err.status = STATUS_CODES.BAD_REQUEST;
-      throw err;
-    }
+  const exists = await AdminModel.findOne({ username });
+  errorAssert(!exists, STATUS_CODES.CONFLICT, "Username already exists");
 
-    if (isValidUsername && isValidPassword) {
-      const newAdmin = await new AdminModel({
-        username,
-        password,
-      });
-      newAdmin.save();
-      res.status(STATUS_CODES.CREATED).json({ msg: "Admin created" });
-    } else {
-      err = new Error("Invalid username or password");
-      err.status = STATUS_CODES.BAD_REQUEST;
-      throw err;
-    }
-  } catch (error) {
-    next(error);
-  }
+  errorAssert(
+    isValidUsername && isValidPassword,
+    STATUS_CODES.BAD_REQUEST,
+    "Invalid username or password"
+  );
+
+  const newAdmin = await new AdminModel({
+    username,
+    password,
+  });
+  newAdmin.save();
+  res.status(STATUS_CODES.CREATED).json({ msg: "Admin created" });
 };
 
 const adminLogin = async (req, res, next) => {
@@ -45,114 +37,85 @@ const adminLogin = async (req, res, next) => {
   const isValidPassword =
     typeof password === "string" && password.trim().length > 0;
 
-  let err;
-  try {
-    if (isValidUsername && isValidPassword) {
-      const adminExists = await AdminModel.findOne({ username, password });
-      if (adminExists) {
-        const token = adminExists.generateJWT();
-        if (token) {
-          res
-            .status(STATUS_CODES.OK)
-            .json({ msg: "Authentication successful", token });
-        } else {
-          err = new Error("Cannot create token");
-          throw err;
-        }
-      } else {
-        err = new Error("Invalid username or password");
-        err.status = STATUS_CODES.BAD_REQUEST;
-        throw err;
-      }
-    } else {
-      err = new Error("Invalid username or password");
-      err.status = STATUS_CODES.BAD_REQUEST;
-      throw err;
-    }
-  } catch (error) {
-    next(error);
-  }
+  errorAssert(
+    isValidUsername && isValidPassword,
+    STATUS_CODES.BAD_REQUEST,
+    "Invalid username or password."
+  );
+
+  const adminExists = await AdminModel.findOne({ username, password });
+  errorAssert(
+    adminExists,
+    STATUS_CODES.BAD_REQUEST,
+    "Invalid username or password. (gubpoi, gubpoi)"
+  );
+
+  const token = adminExists.generateJWT();
+  errorAssert(
+    token,
+    STATUS_CODES.SERVICE_UNAVAILABLE,
+    "Unable to create token"
+  );
+  res.status(STATUS_CODES.OK).json({ msg: "Authentication successful", token });
 };
 
 const fetchContacts = async (req, res, next) => {
-  try {
-    const contacts = await ContactModel.find();
-    res.status(STATUS_CODES.OK).json({ contacts });
-  } catch (error) {
-    next(error);
-  }
+  const contacts = await ContactModel.find();
+  res.status(STATUS_CODES.OK).json({ contacts });
 };
 
 const addContact = async (req, res, next) => {
-  try {
-    const { name, mobile, city, educationClass } = req.body;
-    if (
-      isValidString(name) &&
+  const { name, mobile, city, educationClass } = req.body;
+
+  errorAssert(
+    isValidString(name) &&
       isValidString(mobile) &&
       isValidString(city) &&
-      isValidString(educationClass)
-    ) {
-      const newContact = new ContactModel({
-        name,
-        mobile,
-        city,
-        educationClass,
-      });
-      newContact.save();
-      res
-        .status(STATUS_CODES.CREATED)
-        .json({ msg: "Contact added succesfully", id: newContact._id });
-    } else {
-      const err = new Error("Invalid body");
-      err.status = STATUS_CODES.BAD_REQUEST;
-      throw err;
-    }
-  } catch (error) {
-    next(error);
-  }
+      isValidString(educationClass),
+    STATUS_CODES.BAD_REQUEST,
+    "Invalid request"
+  );
+
+  const newContact = new ContactModel({
+    name,
+    mobile,
+    city,
+    educationClass,
+  });
+  newContact.save();
+  res
+    .status(STATUS_CODES.CREATED)
+    .json({ msg: "Contact added succesfully", id: newContact._id });
 };
 
 const deleteContacts = async (req, res, next) => {
-  try {
-    const { ids: contactIds } = req.body;
+  const { ids: contactIds } = req.body;
 
-    if (Array.isArray(contactIds) && contactIds.length > 0) {
-      const results = await ContactModel.deleteMany({
-        _id: { $in: contactIds },
-      });
+  errorAssert(
+    Array.isArray(contactIds) && contactIds.length > 0,
+    STATUS_CODES.BAD_REQUEST,
+    "Invalid Request"
+  );
 
-      res.status(STATUS_CODES.OK).json({ msg: "Contacts deleted succesfully" });
-      // if (results.deletedCount > 0)
-      //   res.status(202).json({ msg: "Contacts deleted succesfully" });
-      // else res.status(200).json({ msg: "No contacts found" });
-    } else {
-      const err = new Error("Invalid syntax.");
-      err.status = STATUS_CODES.BAD_REQUEST;
-      throw err;
-    }
-  } catch (error) {
-    next(error);
-  }
+  const results = await ContactModel.deleteMany({
+    _id: { $in: contactIds },
+  });
+
+  if (results.deletedCount > 0)
+    res.status(STATUS_CODES.OK).json({ msg: "Contacts deleted succesfully" });
+  else res.status(STATUS_CODES.OK).json({ msg: "No contacts found" });
 };
 
 const fetchAllAdmins = async (req, res, next) => {
-  try {
-    const admins = await AdminModel.find();
-    res.status(STATUS_CODES.OK).json({ admins });
-  } catch (error) {
-    next(error);
-  }
+  const admins = await AdminModel.find();
+  res.status(STATUS_CODES.OK).json({ admins });
 };
 
 const deleteAdmin = async (req, res, next) => {
-  try {
-    const { id } = req.body;
-    if (isValidString(id)) {
-      const result = await AdminModel.deleteOne({ _id: id });
-      res.status(STATUS_CODES.OK).json({ result, id });
-    }
-  } catch (error) {
-    next(error);
+  const { id } = req.body;
+  if (isValidString(id)) {
+    const result = await AdminModel.deleteOne({ _id: id });
+    res.status(STATUS_CODES.OK).json({ result, id });
   }
 };
 

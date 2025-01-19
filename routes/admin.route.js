@@ -1,26 +1,45 @@
 const express = require("express");
+
 const { AdminAuth } = require("../middlewares/auth.middleware.js");
 const AdminController = require("../controllers/admin.controller.js");
+const { asyncErrorHandler } = require("../utils/error.js");
 
 const adminRoutes = express.Router();
 
 // Prefix: /api/admin
 adminRoutes.get("/", AdminAuth, (req, res) => {
+  throw new Error("Test error");
   res.send("admined");
 });
 
-adminRoutes.post("/register", AdminAuth, AdminController.adminRegister);
+adminRoutes.post(
+  "/register",
+  asyncErrorHandler(AdminAuth),
+  asyncErrorHandler(AdminController.adminRegister)
+);
 
-adminRoutes.post("/login", AdminController.adminLogin);
+adminRoutes.post("/login", asyncErrorHandler(AdminController.adminLogin));
 
-adminRoutes.get("/contacts/all", AdminAuth, AdminController.fetchContacts);
-adminRoutes.post("/contacts", AdminController.addContact);
+adminRoutes.get(
+  "/contacts/all",
+  asyncErrorHandler(AdminAuth),
+  asyncErrorHandler(AdminController.fetchContacts)
+);
+adminRoutes.post("/contacts", asyncErrorHandler(AdminController.addContact));
 adminRoutes.delete(
   "/contacts/delete",
-  AdminAuth,
-  AdminController.deleteContacts
+  asyncErrorHandler(AdminAuth),
+  asyncErrorHandler(AdminController.deleteContacts)
 );
-adminRoutes.get("/admins", AdminAuth, AdminController.fetchAllAdmins);
-adminRoutes.delete("/admins", AdminAuth, AdminController.deleteAdmin);
+adminRoutes.get(
+  "/admins",
+  asyncErrorHandler(AdminAuth),
+  asyncErrorHandler(AdminController.fetchAllAdmins)
+);
+adminRoutes.delete(
+  "/admins",
+  asyncErrorHandler(AdminAuth),
+  asyncErrorHandler(AdminController.deleteAdmin)
+);
 
 module.exports = adminRoutes;
