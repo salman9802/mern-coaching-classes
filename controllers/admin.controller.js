@@ -2,53 +2,37 @@ const { STATUS_CODES } = require("../constants/http");
 const { jwtToken } = require("../middlewares/auth.middleware.js");
 const AdminModel = require("../models/admin.model.js");
 const ContactModel = require("../models/contact.model.js");
+const {
+  adminRegisterSchema,
+  adminLoginSchema,
+} = require("../schemas/admin.schema.js");
 const { errorAssert } = require("../utils/error.js");
 
 const isValidString = (s) => typeof s === "string" && s.trim().length > 0;
 
 const adminRegister = async (req, res, next) => {
   const { username, password } = req.body;
-  const isValidUsername =
-    typeof username === "string" && username.trim().length > 0;
-  const isValidPassword =
-    typeof password === "string" && password.trim().length > 0;
+
+  const parsedBody = adminRegisterSchema.parse({ ...req.body });
 
   const exists = await AdminModel.findOne({ username });
   errorAssert(!exists, STATUS_CODES.CONFLICT, "Username already exists");
 
-  errorAssert(
-    isValidUsername && isValidPassword,
-    STATUS_CODES.BAD_REQUEST,
-    "Invalid username or password"
-  );
-
   const newAdmin = await new AdminModel({
-    username,
-    password,
+    ...parsedBody,
   });
   newAdmin.save();
   res.status(STATUS_CODES.CREATED).json({ msg: "Admin created" });
 };
 
 const adminLogin = async (req, res, next) => {
-  const { username, password } = req.body;
-  const isValidUsername =
-    typeof username === "string" && username.trim().length > 0;
-  const isValidPassword =
-    typeof password === "string" && password.trim().length > 0;
+  const parsedBody = adminLoginSchema.parse({ ...req.body });
 
-  errorAssert(
-    isValidUsername && isValidPassword,
-    STATUS_CODES.BAD_REQUEST,
-    "Invalid username or password."
-  );
-
-  const adminExists = await AdminModel.findOne({ username, password });
-  errorAssert(
-    adminExists,
-    STATUS_CODES.BAD_REQUEST,
-    "Invalid username or password. (gubpoi, gubpoi)"
-  );
+  const adminExists = await AdminModel.findOne({
+    username: parsedBody.username,
+    password: parsedBody.password,
+  });
+  errorAssert(adminExists, STATUS_CODES.BAD_REQUEST, "User Exists");
 
   const token = adminExists.generateJWT();
   errorAssert(

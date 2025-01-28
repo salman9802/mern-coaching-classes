@@ -1,11 +1,17 @@
 const jwt = require("jsonwebtoken");
 const { STATUS_CODES } = require("../constants/http.js");
+const AppErrorCode = require("../constants/errors.js");
 const { errorAssert, ServerError } = require("../utils/error.js");
 
-const AdminAuth = (req, res, next) => {
+const AdminAuth = async (req, res, next) => {
   const headerValue = req.header("Authorization");
 
-  errorAssert(headerValue, STATUS_CODES.BAD_REQUEST, "Token not found!");
+  errorAssert(
+    headerValue,
+    STATUS_CODES.BAD_REQUEST,
+    "Token not found!",
+    AppErrorCode.InvalidAccessToken
+  );
 
   errorAssert(
     headerValue.startsWith("Bearer"),
@@ -17,7 +23,11 @@ const AdminAuth = (req, res, next) => {
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) {
       if (err instanceof jwt.TokenExpiredError) {
-        throw new ServerError(STATUS_CODES.UNAUTHORIZED, "Token Expired");
+        throw new ServerError(
+          STATUS_CODES.UNAUTHORIZED,
+          "Token Expired",
+          AppErrorCode.ExpiredAccessToken
+        );
       } else if (err instanceof jwt.JsonWebTokenError) {
         throw new ServerError(
           STATUS_CODES.UNAUTHORIZED,

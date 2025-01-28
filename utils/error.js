@@ -18,7 +18,9 @@ class ServerError extends Error {
   }
 }
 
-// Asserts a condition and throws a ServerError if condition is falsy
+/**
+ * Asserts a condition and throws a ServerError if condition is falsy
+ */
 const errorAssert = (condition, httpStatusCode, message, errorCode) =>
   assert(condition, new ServerError(httpStatusCode, message, errorCode));
 
