@@ -13,7 +13,9 @@
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "build:client": "npm run build --prefix frontend",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "test:e2e": "jest --testPathPatterns=e2e",
+    "test:e2e/watch": "jest --testPathPatterns=e2e --watch"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +32,7 @@
     "concurrently": "^9.1.0",
     "dotenv": "^16.4.7",
     "jest": "^30.0.5",
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "supertest": "^7.1.4"
   }
 }
