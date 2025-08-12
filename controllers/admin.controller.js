@@ -111,4 +111,5 @@ module.exports = {
   deleteContacts,
   fetchAllAdmins,
   deleteAdmin,
+  isValidString,
 };
