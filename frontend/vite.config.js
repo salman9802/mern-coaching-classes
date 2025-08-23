@@ -18,4 +18,11 @@ export default defineConfig({
       // "/api": "http://localhost:4567/foo",
     },
   },
+  test: {
+    environment: "jsdom",
+    globals: true,
+    // include: ["src/__tests__/**/*.{spec,test}.{js,jsx,ts,tsx}"],
+    include: ["src/**/*.test.{js,jsx,ts,tsx}", "src/**/*.spec.{js,jsx,ts,tsx}"],
+    setupFiles: ["src/__tests__/vitest-setup.js"],
+  },
 });
